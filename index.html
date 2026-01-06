@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jigar Kadival | Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Verdana, sans-serif;
+        background-color: #f2f4f7;
+        color: #222;
+    }
+
+    .container {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    /* LEFT PROFILE PANEL */
+    .sidebar {
+        width: 280px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .sidebar img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 5px solid #ecf0f1;
+        margin-bottom: 18px;
+    }
+
+    .sidebar h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .sidebar p {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #dcdde1;
+    }
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .sidebar a:hover {
+        text-decoration: underline;
+    }
+
+
+    /* RIGHT CONTENT */
+    .content {
+        flex: 1;
+        padding: 40px;
+    }
+
+    .section {
+        margin-bottom: 35px;
+    }
+
+    .section h2 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        border-left: 6px solid #2c3e50;
+        padding-left: 10px;
+    }
+
+    .skills span {
+        display: inline-block;
+        background-color: #2c3e50;
+        color: white;
+        padding: 8px 12px;
+        margin: 5px;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+    .project, .resume-box {
+            background-color: rgb(255, 251, 251);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+
+    ul {
+        padding-left: 18px;
+    }
+
+    footer {
+        text-align: center;
+        font-size: 13px;
+        color: #777;
+        margin-top: 40px;
+    }
+
+    /* MOBILE VIEW */
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- PROFILE PANEL -->
+    <div class="sidebar">
+        <img src="profile.jpg" alt="Jigar Kadival">
+        <h1>Jigar Kadival</h1>
+        <br>
+        <p>
+            Electronics & Communication Engineering Student<br>
+            Embedded Systems | Microcontrollers
+        </p>
+        <br>
+        <p>
+   
+            📧 <a href="mailto:jigarpatelg1412@gmail.com">jigarpatelg1412@gmail.com</a><br>
+   
+            📞 +91 82008 86707<br>
+   
+            🔗 <a href="https://www.linkedin.com/in/jigar-kadival-cte-gecbvn-ec-5a908a295" target="_blank">Jigar Kadival</a>
+
+        </p>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+
+        <div class="section">
+            <h2>About Me</h2>
+            <p>
+                I am an Electronics & Communication Engineering student with a strong
+                interest in embedded systems and hardware-based projects.
+                I enjoy working with microcontrollers and learning how software
+                controls real-world electronic devices.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <span>Analog Circuits</span>
+                <span>Digital Electronics</span>
+                <span>Arduino</span>
+                <span>ARM / AVR</span>
+                <span>Embedded C</span>
+                <span>Sensor Interfacing</span>
+                <span>UART</span>
+                <span>SPI</span>
+                <span>I2C</span>
+                <span>Basic PCB Design</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="project">
+            <p>
+                <strong>B.E. Electronics & Communication Engineering</strong><br>
+                Government Engineering College, Bhavnagar<br>
+                2022 – Present
+            </p>
+            <p>
+                <b>HSC</b><br>
+                New Shradhdha Vidhyalaya<br>
+                2021-2022 
+            </p>
+            <p>
+                <b>SSC</b><br>
+                New Shradhdha Vidhyalaya<br>
+                2019-2020 
+
+            </p>
+            </div>
+        </div>
+
+
+
+        <div class="section">
+            <h2>Projects</h2>
+            <div class="project">
+            <ul>
+                <li>
+                    <strong>Smart Door Lock System</strong><br>
+                    <hr>
+                <ul>
+                    <li>Designed and implemented an embedded system for a smart door lock using microcontroller (Arduino) and sensors.</li> 
+                   <li>Integrated RFID module, LCD display with I2C interface, and servo motor for secure and user-friendly access control.</li> 
+                   <li>Programmed using embedded C for real-time interaction between RFID reader, LCD status display, and servo motor actuation.</li> 
+                   <li>Applied core concepts of digital electronics, microcontroller interfacing, and hardware-software integration typical in VLSI and embedded systems projects.</li> 
+                
+                </ul>
+                </li>
+                <br>
+                <li>
+                    <strong>Temperature & Humidity Monitoring System</strong><br>
+                    <hr>
+                <ul>
+                    <li>Made a system that measures temperature and humidity using an ESP32 microcontroller and a DHT22 sensor.</li>
+                    <li>Used a 16x2 LCD with I2C to show live sensor readings on the display.</li>
+                    <li>Wrote the program in Embedded C/Arduino to read data from the sensor and update it on the LCD.</li>
+                    <li>Learned and applied microcontroller basics, sensor connections, and hardware–software communication.</li> 
+                    <li>This project can be used for smart home systems and weather monitoring purposes.</li> 
+                </ul>
+                </li>
+            </ul>
+            </div>
+        </div>
+
+        <footer>
+            © 2026 Jigar Kadival
+        </footer>
+
+    </div>
+</div>
+
+</body>
+</html>
