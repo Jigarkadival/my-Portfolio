@@ -118,9 +118,7 @@ nav {
   display: none;
   position: fixed;
   top: 60px; left: 0; right: 0;
-  background: rgba(8,12,16,0.97);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: #080c10;
   border-bottom: 1px solid var(--border);
   padding: 24px var(--px) 32px;
   z-index: 190;
@@ -129,6 +127,7 @@ nav {
   opacity: 0;
   transition: opacity 0.25s ease, transform 0.25s ease;
   pointer-events: none;
+  z-index: 500;
 }
 .nav-drawer.open {
   opacity: 1;
@@ -633,11 +632,12 @@ section {
   flex-shrink: 0;
 }
 .contact-link-text {
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
    white-space: normal;
   flex: 1;
   min-width: 0;
+  word-wrap: break-word;
 }
 
 /* ═══════════════════════════════════════════
