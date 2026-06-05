@@ -2,234 +2,830 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Jigar Kadival | Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jigar Kadival — Embedded Systems Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        font-family: Verdana, sans-serif;
-        background-color: #f2f4f7;
-        color: #222;
-    }
+:root {
+  --bg: #080c10;
+  --bg2: #0d1117;
+  --bg3: #111820;
+  --accent: #00e5ff;
+  --accent2: #7b61ff;
+  --accent3: #ff6b35;
+  --text: #e2eaf4;
+  --muted: #627688;
+  --border: rgba(0,229,255,0.12);
+  --card: rgba(13,22,32,0.85);
+  --glow: 0 0 30px rgba(0,229,255,0.18);
+}
 
-    .container {
-        display: flex;
-        min-height: 100vh;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* LEFT PROFILE PANEL */
-    .sidebar {
-        width: 280px;
-        background-color: #2c3e50;
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
-    }
+html { scroll-behavior: smooth; }
 
-    .sidebar img {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 5px solid #ecf0f1;
-        margin-bottom: 18px;
-    }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
 
-    .sidebar h1 {
-        font-size: 24px;
-        margin-bottom: 8px;
-    }
+/* ── CIRCUIT BG ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .sidebar p {
-        font-size: 14px;
-        line-height: 1.5;
-        color: #dcdde1;
-    }
-    .sidebar a {
-        color: white;
-        text-decoration: none;
-    }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(8,12,16,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
 
-    .sidebar a:hover {
-        text-decoration: underline;
-    }
+.nav-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  font-family: 'Space Mono', monospace;
+}
+.nav-links a:hover { color: var(--accent); }
 
-    /* RIGHT CONTENT */
-    .content {
-        flex: 1;
-        padding: 40px;
-    }
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 48px 80px;
+  z-index: 1;
+  overflow: hidden;
+}
 
-    .section {
-        margin-bottom: 35px;
-    }
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(123,97,255,0.07) 0%, transparent 70%);
+  bottom: -80px; left: 60px;
+  pointer-events: none;
+}
 
-    .section h2 {
-        color: #2c3e50;
-        margin-bottom: 10px;
-        border-left: 6px solid #2c3e50;
-        padding-left: 10px;
-    }
+.hero-content { max-width: 700px; position: relative; z-index: 2; }
 
-    .skills span {
-        display: inline-block;
-        background-color: #2c3e50;
-        color: white;
-        padding: 8px 12px;
-        margin: 5px;
-        border-radius: 4px;
-        font-size: 13px;
-    }
-    .project, .resume-box {
-            background-color: rgb(255, 251, 251);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-        }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,229,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s infinite;
+}
 
-    ul {
-        padding-left: 18px;
-    }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
-    footer {
-        text-align: center;
-        font-size: 13px;
-        color: #777;
-        margin-top: 40px;
-    }
+.hero h1 {
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
 
-    /* MOBILE VIEW */
-    @media (max-width: 768px) {
-        .container {
-            flex-direction: column;
-        }
-        .sidebar {
-            width: 100%;
-        }
-    }
+.hero h1 span {
+  display: block;
+  background: linear-gradient(120deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  margin-top: 24px;
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+  animation: fadeUp 0.6s 0.2s ease both;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  margin-top: 48px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent);
+  color: #080c10;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  box-shadow: 0 0 24px rgba(0,229,255,0.25);
+}
+.btn-primary:hover {
+  background: #00c8e0;
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0,229,255,0.4);
+}
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  color: var(--text);
+  padding: 14px 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.hero-meta {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  margin-top: 56px;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.meta-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.meta-item:hover { color: var(--accent); }
+.meta-icon { font-size: 16px; }
+
+/* ── SECTION LAYOUT ── */
+section {
+  position: relative; z-index: 1;
+  padding: 96px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 56px;
+}
+.section-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+.section-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.skill-card:hover {
+  border-color: rgba(0,229,255,0.3);
+  transform: translateY(-4px);
+  box-shadow: var(--glow);
+}
+.skill-card:hover::before { opacity: 1; }
+
+.skill-card-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 16px;
+}
+
+.skill-tags {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.skill-tag {
+  background: rgba(0,229,255,0.06);
+  border: 1px solid rgba(0,229,255,0.15);
+  color: var(--text);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: 'Space Mono', monospace;
+}
+
+/* ── EXPERIENCE ── */
+.exp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.exp-card::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+}
+.exp-card:hover {
+  border-color: rgba(0,229,255,0.25);
+  box-shadow: var(--glow);
+}
+
+.exp-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 12px;
+  margin-bottom: 24px;
+}
+.exp-title { font-size: 22px; font-weight: 700; }
+.exp-company { color: var(--accent); font-size: 15px; margin-top: 4px; }
+.exp-period {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(0,229,255,0.06);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.exp-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.exp-list li {
+  display: flex; gap: 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b0bec5;
+}
+.exp-list li::before {
+  content: '▸';
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  transition: all 0.3s;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.project-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0,229,255,0.04), rgba(123,97,255,0.04));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover {
+  border-color: rgba(0,229,255,0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow);
+}
+.project-card:hover::before { opacity: 1; }
+
+.project-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.icon-cyan { background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2); }
+.icon-purple { background: rgba(123,97,255,0.1); border: 1px solid rgba(123,97,255,0.2); }
+.icon-orange { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.2); }
+
+.project-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+
+.project-card p {
+  font-size: 14px;
+  color: #8fa0b0;
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech-badge {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* ── EDUCATION ── */
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.edu-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  transition: all 0.3s;
+  position: relative;
+}
+.edu-card:hover {
+  border-color: rgba(123,97,255,0.3);
+  box-shadow: 0 0 30px rgba(123,97,255,0.1);
+  transform: translateY(-3px);
+}
+.edu-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  font-family: 'Space Mono', monospace;
+  background: rgba(123,97,255,0.1);
+  border: 1px solid rgba(123,97,255,0.2);
+  padding: 4px 10px;
+  border-radius: 3px;
+  margin-bottom: 14px;
+}
+.edu-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.edu-card .edu-school { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.edu-card .edu-year { font-size: 12px; color: var(--accent); font-family: 'Space Mono', monospace; }
+
+/* ── CONTACT ── */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.contact-text h3 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.contact-text p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 16px; }
+.contact-link {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 24px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateX(6px);
+  box-shadow: var(--glow);
+}
+.contact-link-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: rgba(0,229,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 40px 48px;
+  border-top: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  position: relative; z-index: 1;
+  letter-spacing: 1px;
+}
+
+/* ── DIVIDER ── */
+.section-divider {
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  section { padding: 64px 24px; }
+  .contact-wrapper { grid-template-columns: 1fr; gap: 32px; }
+  .hero h1 { font-size: 44px; }
+  .projects-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JK.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-    <!-- PROFILE PANEL -->
-    <div class="sidebar">
-        <img src="profile.jpg" alt="Jigar Kadival">
-        <h1>Jigar Kadival</h1>
-        <br>
-        <p>
-            Electronics & Communication Engineering Student<br>
-            Embedded Systems | Microcontrollers
-        </p>
-        <br>
-        <p>
-   
-            📧 <a href="mailto:jigarpatelg1412@gmail.com">jigarpatelg1412@gmail.com</a><br>
-
-            📞 <a href="tel:+918200886707">+91 82008 86707</a><br>
-
-            🔗 <a href="https://www.linkedin.com/in/jigar-kadival-cte-gecbvn-ec-5a908a295" target="_blank">linkedin</a>
-
-        </p>
-
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Embedded Systems Engineer</div>
+    <h1>
+      Jigar<br>
+      <span>Kadival</span>
+    </h1>
+    <p class="hero-sub">
+      Electronics &amp; Communication Engineering student specializing in firmware development, ESP32 systems, and hardware-software integration. Building robust IoT solutions from bare-metal drivers to connected interfaces.
+    </p>
+    <div class="hero-actions">
+      <a href="JIGAR_KADIVAL_S_CV.pdf" class="btn-primary" download>
+        ↓ Download CV
+      </a>
+      <a href="https://www.linkedin.com/in/jigar-kadival-5a908a295" target="_blank" class="btn-outline">
+        ↗ LinkedIn
+      </a>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="content">
-
-        <div class="section">
-            <h2>About Me</h2>
-            <p>
-                I am an Electronics & Communication Engineering student with a strong interest in embedded systems and hardware-based projects. I enjoy working with microcontrollers, sensors, and real-time applications, and I am continuously improving my practical skills through hands-on projects.
-            </p>
-
-            <p>
-                I believe in continuous learning and practical implementation, and I am always eager to apply my technical knowledge to real-world engineering challenges.
-            </p>
-
-        </div>
-
-        <div class="section">
-            <h2>Skills</h2>
-            <div class="skills">
-                <span>Analog Circuits</span>
-                <span>Digital Electronics</span>
-                <span>Arduino</span>
-                <span>ARM / AVR</span>
-                <span>Embedded C</span>
-                <span>Sensor Interfacing</span>
-                <span>UART</span>
-                <span>SPI</span>
-                <span>I2C</span>
-                <span>Basic PCB Design</span>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Education</h2>
-            <div class="project">
-            <p>
-                <strong><u>Electronics & Communication Engineering</u></strong><br>
-                Government Engineering College, Bhavnagar<br>
-                2022 – Present
-            </p>
-            <p>
-                <strong><u>HSC</u></strong><br>
-                New Shradhdha Vidhyalaya<br>
-                2021-2022 
-            </p>
-            <p>
-                <strong><u>SSC</u></strong><br>
-                New Shradhdha Vidhyalaya<br>
-                2019-2020 
-
-            </p>
-            </div>
-        </div>
-
-
-
-        <div class="section">
-            <h2>Projects</h2>
-            <div class="project">
-            <ul>
-                <li>
-                    <strong>Smart Door Lock System</strong><br>
-                    <hr>
-                    <P>
-                      Designed and implemented a smart door lock using Arduino. Integrated RFID module, LCD display (I2C), and servo motor for secure access control.
-                    </P>
-                </li>
-                <br> 
-                <li>
-                    <strong>Temperature & Humidity Monitoring System (in wokwi)</strong><br>
-                    <hr>
-                    <p>
-                    Built a system using ESP32 and DHT22 sensor to measure temperature and humidity. Displayed live data on a 16x2 LCD.
-                    </p>
-                </li>
-            </ul>
-            </div>
-        </div>
-
-        <footer>
-            © 2026 Jigar Kadival
-        </footer>
-
+    <div class="hero-meta">
+      <a href="mailto:jigarpatelg1412@gmail.com" class="meta-item">
+        <span class="meta-icon">✉</span> jigarpatelg1412@gmail.com
+      </a>
+      <a href="tel:+918200886707" class="meta-item">
+        <span class="meta-icon">📞</span> +91 82008 86707
+      </a>
+      <a href="https://maps.app.goo.gl/RSNdAo2yFp1jgbHp6" target="_blank" class="meta-item">
+        <span class="meta-icon">📍</span> Ahmedabad, Gujarat
+      </a>
     </div>
+  </div>
 </div>
 
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">01 /</span>
+    <h2>Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-card-title">Core EC Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Microcontroller Architecture</span>
+        <span class="skill-tag">ESP32-S3</span>
+        <span class="skill-tag">Arduino</span>
+        <span class="skill-tag">Firmware Development</span>
+        <span class="skill-tag">LVGL</span>
+        <span class="skill-tag">LittleFS</span>
+        <span class="skill-tag">TFT Display Interfacing</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-title">Programming</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Embedded C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">Python (basics)</span>
+        <span class="skill-tag">Assembly</span>
+        <span class="skill-tag">8051 / AVR / ARM</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-title">IoT &amp; Protocols</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MQTT</span>
+        <span class="skill-tag">Wi-Fi</span>
+        <span class="skill-tag">UART</span>
+        <span class="skill-tag">SPI</span>
+        <span class="skill-tag">I2C</span>
+        <span class="skill-tag">API Integration</span>
+        <span class="skill-tag">JSON Parsing</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-title">Tools &amp; Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Arduino IDE</span>
+        <span class="skill-tag">ESP-IDF</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Teamwork</span>
+        <span class="skill-tag">Time Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <span class="section-num">02 /</span>
+    <h2>Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-card fade-in">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Embedded Systems Intern</div>
+        <div class="exp-company">Bonrix Embedded Innovations · Ahmedabad, Gujarat</div>
+      </div>
+      <div class="exp-period">Jan 2026 – Apr 2026</div>
+    </div>
+    <ul class="exp-list">
+      <li>Developed firmware in C for a 7-inch ESP32-S3 HMI smart display, managing JSON data parsing to render dynamic billing interfaces for retail point-of-sale systems.</li>
+      <li>Built a smart touch-panel feedback collection UI using LVGL and LittleFS for efficient image asset storage, integrating APIs for real-time data synchronization.</li>
+      <li>Engineered an SMS receiver system using a SIM7672S 4G module on a Bharat Pi board, optimizing power management and remote IoT connectivity.</li>
+      <li>Engineered custom firmware using the ESP-IDF framework to drive responsive UI layouts across 480×480 VIEWE smart displays and standard 320×480 TFT modules.</li>
+      <li>Developed graphical interfaces for miniature footprint screens (compact USB dongle displays), optimizing rendering logic for clear data visualization on constrained hardware.</li>
+      <li>Implemented lightweight MQTT messaging protocols on ESP32 hardware to establish low-latency, bi-directional communication between remote IoT nodes and central servers.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">03 /</span>
+    <h2>Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in">
+      <div class="project-icon icon-cyan">🔐</div>
+      <h3>Smart Door Lock System</h3>
+      <p>Designed and implemented an embedded access control system using Arduino with RFID, I2C LCD display, and servo motor for secure, real-time interaction and user-friendly access management.</p>
+      <div class="project-tech">
+        <span class="tech-badge">Arduino</span>
+        <span class="tech-badge">RFID</span>
+        <span class="tech-badge">I2C</span>
+        <span class="tech-badge">Servo Motor</span>
+        <span class="tech-badge">Embedded C</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-icon icon-orange">🌡️</div>
+      <h3>Temperature & Humidity Monitor</h3>
+      <p>Built a real-time environmental monitoring system using ESP32 and DHT22 sensor. Live readings are displayed on a 16×2 I2C LCD. Simulated in WOKWI — applicable to smart home and weather monitoring.</p>
+      <div class="project-tech">
+        <span class="tech-badge">ESP32</span>
+        <span class="tech-badge">DHT22</span>
+        <span class="tech-badge">I2C LCD</span>
+        <span class="tech-badge">WOKWI</span>
+        <span class="tech-badge">Embedded C</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-in">
+      <div class="project-icon icon-purple">💬</div>
+      <h3>Smart IoT Feedback Kiosk</h3>
+      <p>Developed a touch-based feedback kiosk on ESP32-S3 with LVGL UI featuring emoji ratings, dynamic tags, and on-screen keyboard. Integrated HTTPS API sync to Firebase, LittleFS offline logging, and a PIN-protected admin panel.</p>
+      <div class="project-tech">
+        <span class="tech-badge">ESP32-S3</span>
+        <span class="tech-badge">LVGL</span>
+        <span class="tech-badge">LittleFS</span>
+        <span class="tech-badge">PSRAM</span>
+        <span class="tech-badge">Firebase</span>
+        <span class="tech-badge">HTTPS API</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header fade-in">
+    <span class="section-num">04 /</span>
+    <h2>Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card fade-in">
+      <div class="edu-badge">B.E. Degree</div>
+      <h3>Electronics &amp; Communication Engineering</h3>
+      <div class="edu-school">Government Engineering College, Bhavnagar</div>
+      <div class="edu-year">2022 – 2026</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-badge">HSC · Class 12</div>
+      <h3>Science Stream</h3>
+      <div class="edu-school">New Shradhdha Vidhyalaya</div>
+      <div class="edu-year">2021 – 2022</div>
+    </div>
+    <div class="edu-card fade-in">
+      <div class="edu-badge">SSC · Class 10</div>
+      <h3>Secondary School</h3>
+      <div class="edu-school">New Shradhdha Vidhyalaya</div>
+      <div class="edu-year">2019 – 2020</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrapper">
+    <div class="contact-text fade-in">
+      <div class="section-header" style="margin-bottom: 24px;">
+        <span class="section-num">05 /</span>
+        <h2>Contact</h2>
+      </div>
+      <h3>Let's build<br>something great.</h3>
+      <p style="margin-top: 16px;">Open to internships, collaborations, and embedded systems projects. Feel free to reach out anytime.</p>
+    </div>
+    <div class="contact-links fade-in">
+      <a href="mailto:jigarpatelg1412@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉</div>
+        jigarpatelg1412@gmail.com
+      </a>
+      <a href="tel:+918200886707" class="contact-link">
+        <div class="contact-link-icon">📞</div>
+        +91 82008 86707
+      </a>
+      <a href="https://www.linkedin.com/in/jigar-kadival-5a908a295" target="_blank" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        linkedin.com/in/jigar-kadival
+      </a>
+      <a href="https://maps.app.goo.gl/RSNdAo2yFp1jgbHp6" target="_blank" class="contact-link">
+        <div class="contact-link-icon">📍</div>
+        Ahmedabad, Gujarat, India
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Jigar Kadival — Crafted with precision
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
