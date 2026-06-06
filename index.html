@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>Jigar Kadival — Embedded Systems Engineer</title>
+<!-- FINAL VERSION: all text wrapping fixed -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -71,7 +72,7 @@ nav {
   color: var(--accent);
   letter-spacing: 2px;
   text-transform: uppercase;
-   white-space: normal;
+  white-space: nowrap;
 }
 
 /* Desktop nav links */
@@ -99,7 +100,7 @@ nav {
   background: none; border: none;
   cursor: pointer;
   padding: 4px;
-  z-index: 300;
+  z-index: 10000; /* above the menu overlay */
 }
 .nav-toggle span {
   display: block;
@@ -113,44 +114,55 @@ nav {
 .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile drawer */
-
+/* ── MOBILE MENU: full-screen solid overlay ──
+   z-index 9999 ensures it covers EVERYTHING.
+   background #080c10 (no alpha, no blur) = nothing bleeds through. */
 .nav-drawer {
-  display: none;
+  display: none;               /* JS sets display:flex on open */
   position: fixed;
-  top: 60px; left: 0; right: 0;
-  background: #080c10; 
-  /* backdrop-filter: blur(24px); */
-  /* -webkit-backdrop-filter: blur(24px); */
-  border-bottom: 1px solid var(--border);
-  padding: 24px var(--px) 32px;
-  /* Ensure a high z-index so it covers everything */
-  z-index: 500; 
-  flex-direction: column; gap: 0;
-  transform: translateY(-8px);
+  inset: 0;                    /* covers full viewport — top to bottom */
+  background: #080c10;         /* 100% opaque, no transparency */
+  z-index: 9999;               /* above nav (1000) and every section */
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px var(--px) 48px;
   opacity: 0;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease;
   pointer-events: none;
+}
+/* Accent line at top */
+.nav-drawer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
 }
 .nav-drawer.open {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: all;
 }
 .nav-drawer a {
-  display: block;
-  color: var(--muted);
+  display: flex; align-items: center; gap: 14px;
+  color: var(--text);
   text-decoration: none;
   font-family: 'Space Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 1.5px;
+  font-size: clamp(16px, 5vw, 26px);
+  letter-spacing: 2px;
   text-transform: uppercase;
   padding: 14px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(0,229,255,0.08);
   transition: color 0.2s;
+  width: 100%;
 }
 .nav-drawer a:last-child { border-bottom: none; }
 .nav-drawer a:hover, .nav-drawer a:active { color: var(--accent); }
+.nav-drawer .mn {
+  font-size: 10px;
+  color: var(--accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
 
 /* ═══════════════════════════════════════════
    HERO
@@ -235,7 +247,7 @@ nav {
   text-transform: uppercase;
   margin-bottom: 20px;
   animation: fadeUp 0.6s ease both;
-   white-space: normal;
+  white-space: nowrap;
 }
 .hero-tag::before {
   content: '';
@@ -271,6 +283,7 @@ nav {
   max-width: 520px;
   animation: fadeUp 0.6s 0.2s ease both;
   font-weight: 400;
+  word-break: break-word;
 }
 
 .hero-actions {
@@ -293,7 +306,7 @@ nav {
   text-transform: uppercase;
   transition: all 0.2s;
   box-shadow: 0 0 24px rgba(0,229,255,0.25);
-   white-space: normal;
+  white-space: nowrap;
 }
 .btn-primary:hover {
   background: #00c8e0;
@@ -313,7 +326,7 @@ nav {
   text-decoration: none;
   text-transform: uppercase;
   transition: all 0.2s;
-   white-space: normal;
+  white-space: nowrap;
 }
 .btn-outline:hover {
   border-color: var(--accent);
@@ -352,22 +365,24 @@ section {
 .section-header {
   display: flex; align-items: center; gap: 12px;
   margin-bottom: clamp(32px, 5vw, 56px);
-  flex-wrap: nowrap;
+  flex-wrap: wrap;   /* allows wrap on tiny screens so line is not squished */
+  row-gap: 4px;
 }
 .section-num {
   font-family: 'Space Mono', monospace;
   font-size: 11px;
   color: var(--accent);
   letter-spacing: 2px;
-   white-space: normal;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 .section-header h2 {
-  font-size: clamp(24px, 4vw, 36px);
+  font-size: clamp(22px, 5vw, 36px);
   font-weight: 800;
   letter-spacing: -1px;
-  white-space: normal;
+  white-space: nowrap; /* section titles like "Skills" are short - OK */
   flex-shrink: 0;
+  word-break: normal;
 }
 .section-line {
   flex: 1;
@@ -453,7 +468,7 @@ section {
   flex-wrap: wrap; gap: 12px;
   margin-bottom: 24px;
 }
-.exp-title { font-size: clamp(17px, 2.5vw, 22px); font-weight: 700; }
+.exp-title { font-size: clamp(15px, 3vw, 22px); font-weight: 700; word-break: break-word; }
 .exp-company { color: var(--accent); font-size: 14px; margin-top: 4px; }
 .exp-period {
   font-family: 'Space Mono', monospace;
@@ -463,15 +478,17 @@ section {
   border: 1px solid var(--border);
   padding: 5px 12px;
   border-radius: 100px;
-   white-space: normal;
+  white-space: nowrap;
   align-self: flex-start;
 }
 .exp-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .exp-list li {
   display: flex; gap: 10px;
-  font-size: clamp(13px, 1.8vw, 14px);
+  font-size: clamp(12px, 2vw, 14px);
   line-height: 1.75;
   color: #b0bec5;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 .exp-list li::before {
   content: '▸';
@@ -521,7 +538,7 @@ section {
 .icon-cyan   { background: rgba(0,229,255,0.1);   border: 1px solid rgba(0,229,255,0.2);   }
 .icon-purple { background: rgba(123,97,255,0.1);  border: 1px solid rgba(123,97,255,0.2);  }
 .icon-orange { background: rgba(255,107,53,0.1);  border: 1px solid rgba(255,107,53,0.2);  }
-.project-card h3 { font-size: clamp(15px, 2vw, 18px); font-weight: 700; margin-bottom: 10px; }
+.project-card h3 { font-size: clamp(14px, 2.5vw, 18px); font-weight: 700; margin-bottom: 10px; word-break: break-word; }
 .project-card p {
   font-size: 13px;
   color: #8fa0b0;
@@ -574,8 +591,17 @@ section {
   border-radius: 3px;
   margin-bottom: 12px;
 }
-.edu-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
-.edu-card .edu-school { font-size: 13px; color: var(--muted); margin-bottom: 6px; line-height: 1.5; }
+.edu-card h3 {
+  font-size: clamp(12px, 2.8vw, 15px); /* ★ fluid: scales down on mobile */
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+}
+.edu-card .edu-school { font-size: clamp(11px, 2vw, 13px); color: var(--muted); margin-bottom: 6px; line-height: 1.5; word-break: break-word; }
 .edu-card .edu-year { font-size: 12px; color: var(--accent); font-family: 'Space Mono', monospace; }
 
 /* ═══════════════════════════════════════════
@@ -635,12 +661,11 @@ section {
   flex-shrink: 0;
 }
 .contact-link-text {
-  overflow: visible;
+  overflow: hidden;
   text-overflow: ellipsis;
-   white-space: normal;
+  white-space: nowrap;
   flex: 1;
   min-width: 0;
-  word-wrap: break-word;
 }
 
 /* ═══════════════════════════════════════════
@@ -721,6 +746,8 @@ footer {
   .meta-item { font-size: 10px; }
   .exp-header { flex-direction: column; gap: 8px; }
   .contact-grid { grid-template-columns: 1fr; }
+  /* Contact email can wrap on very small screens */
+  .contact-link-text { white-space: normal; overflow: visible; word-break: break-all; }
 }
 
 /* Very small phone (e.g. iPhone SE 1st gen: 320px) */
@@ -761,15 +788,15 @@ footer {
   </button>
 </nav>
 
-<!-- Mobile drawer -->
-<nav class="nav-drawer" id="navDrawer" aria-hidden="true">
-  <a href="#about"      onclick="closeDrawer()">About</a>
-  <a href="#skills"     onclick="closeDrawer()">Skills</a>
-  <a href="#experience" onclick="closeDrawer()">Experience</a>
-  <a href="#projects"   onclick="closeDrawer()">Projects</a>
-  <a href="#education"  onclick="closeDrawer()">Education</a>
-  <a href="#contact"    onclick="closeDrawer()">Contact</a>
-</nav>
+<!-- Mobile full-screen menu -->
+<div class="nav-drawer" id="navDrawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
+  <a href="#about"      onclick="closeDrawer()"><span class="mn">01/</span>About</a>
+  <a href="#skills"     onclick="closeDrawer()"><span class="mn">02/</span>Skills</a>
+  <a href="#experience" onclick="closeDrawer()"><span class="mn">03/</span>Experience</a>
+  <a href="#projects"   onclick="closeDrawer()"><span class="mn">04/</span>Projects</a>
+  <a href="#education"  onclick="closeDrawer()"><span class="mn">05/</span>Education</a>
+  <a href="#contact"    onclick="closeDrawer()"><span class="mn">06/</span>Contact</a>
+</div>
 
 <!-- ══ HERO ══ -->
 <div class="hero" id="about">
@@ -1012,11 +1039,11 @@ footer {
     </a>
     <a href="https://www.linkedin.com/in/jigar-kadival-5a908a295" target="_blank" rel="noopener" class="contact-link">
       <div class="contact-link-icon" style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);">in</div>
-      <span class="contact-link-text">linkedin.com/in/jigar-kadival</span>
+      <span class="contact-link-text">Jigar Kadival</span>
     </a>
     <a href="https://www.google.com/maps/place/Limbdi,+Gujarat" target="_blank" rel="noopener" class="contact-link">
       <div class="contact-link-icon">&#128205;</div>
-      <span class="contact-link-text">Limbdi, Gujarat, India</span>
+      <span class="contact-link-text">Limbdi, Gujarat</span>
     </a>
   </div>
 </div>
@@ -1026,39 +1053,47 @@ footer {
 </footer>
 
 <script>
-/* ── Hamburger menu ── */
+/* ── Mobile Menu ──
+   Pattern: display:none by default.
+   openMenu()  → set display:flex, then rAF×2 to trigger opacity transition.
+   closeMenu() → remove .open, wait for transitionend, then display:none.
+   This guarantees the solid #080c10 background fully covers everything. */
 const toggle = document.getElementById('navToggle');
 const drawer = document.getElementById('navDrawer');
+let menuOpen = false;
 
-toggle.addEventListener('click', () => {
-  const isOpen = drawer.classList.toggle('open');
-  toggle.classList.toggle('open', isOpen);
-  toggle.setAttribute('aria-expanded', isOpen);
-  drawer.setAttribute('aria-hidden', !isOpen);
-  // Prevent body scroll when drawer open
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
+function openMenu() {
+  drawer.style.display = 'flex';
+  // Two rAFs: first paints display:flex, second triggers CSS transition
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    drawer.classList.add('open');
+  }));
+  toggle.setAttribute('aria-expanded', 'true');
+  toggle.setAttribute('aria-label', 'Close menu');
+  drawer.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  menuOpen = true;
+}
 
 function closeDrawer() {
   drawer.classList.remove('open');
-  toggle.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-label', 'Open menu');
   drawer.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  menuOpen = false;
+  // Hide element after fade-out transition completes
+  drawer.addEventListener('transitionend', function onEnd() {
+    if (!menuOpen) drawer.style.display = 'none';
+    drawer.removeEventListener('transitionend', onEnd);
+  });
 }
 
-// Close on outside click
-document.addEventListener('click', (e) => {
-  if (drawer.classList.contains('open') &&
-      !drawer.contains(e.target) &&
-      !toggle.contains(e.target)) {
-    closeDrawer();
-  }
-});
+toggle.addEventListener('click', () => menuOpen ? closeDrawer() : openMenu());
 
-// Close on escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+// Close on Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOpen) closeDrawer();
 });
 
 /* ── Scroll-reveal ── */
